@@ -4,11 +4,12 @@
   inputs = {
     nixpkgs.follows = "holochain/nixpkgs";
 
-    versions.url = "github:holochain/holochain?dir=versions/weekly";
+    versions.url = "github:holochain/holochain/holochain-0.4.0-dev.12?dir=versions/weekly";
 
     holochain = {
-      url = "github:holochain/holochain";
+      url = "github:holochain/holochain/holochain-0.4.0-dev.12";
       inputs.versions.follows = "versions";
+      inputs.holochain.url = "github:holochain/holochain/holochain-0.4.0-dev.12";
     };
   };
 
@@ -28,7 +29,7 @@
           , ...
           }: {
             devShells.default = pkgs.mkShell {
-              inputsFrom = [ inputs'.holochain.devShells.holonix ];
+              inputsFrom = [ inputs'.holochain.devShells.holochainBinaries ];
               packages = with pkgs; [
                 nodejs-18_x
                 # more packages go here
